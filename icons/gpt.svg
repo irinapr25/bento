@@ -1,0 +1,11 @@
+<svg width="100" height="100">
+    <rect width="100" height="100" style="filter:url(#f1);" />
+    <filter id="f1">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
+        <feOffset dx="2" dy="2" result="offsetblur" />
+        <feMerge>
+            <feMergeNode />
+            <feMergeNode in="SourceGraphic" />
+        </feMerge>
+    </filter>
+</svg>

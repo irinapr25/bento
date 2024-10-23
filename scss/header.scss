@@ -1,0 +1,379 @@
+.header {
+	//padding-block: toRem(5); // отступы безопасности сверху-снизу
+	//! display: flex;
+	//! align-items: center;
+	// background-color: lime;
+	// width: 100%;
+	// min-height: toRem(150);
+	// @include adaptiveValue('min-height', 150, 90, 0, $containerWidth, 425);
+	// @include adaptiveValue('min-height', 135, 75, 0, $containerWidth, 425);
+	// padding-block: toRem(50) toRem(25);
+	// padding-block: percent(50, 1200) percent(25, 1200);
+
+	@include adaptiveValue('padding-top', 50, 30);
+	@include adaptiveValue('padding-bottom', 25, 15);
+
+	// .header__container
+	&__container {
+		flex-grow: 1;
+		// display: grid;
+		// grid-template-columns: repeat(3, auto);
+		// grid-template-columns: (percent(345, 1200) auto percent(380, 1200) auto 50px);
+		align-items: center;
+		display: flex;
+		// gap: toRem(20);
+
+		@media (max-width: $tablet) {
+			// flex-wrap: wrap;
+			row-gap: toRem(15);
+			// column-gap: toRem(20);
+			// padding-block: toRem(10);
+		}
+		@media (max-width: $mobileL) {
+			flex-wrap: wrap;
+			// display: grid;
+			// column-gap: 0;
+		}
+	}
+
+	// .header__logo
+	&__logo {
+		// grid-column: 1 / 3;
+		// color: $textColorLight;
+		margin-right: toRem(20);
+
+		@media (min-width: toEm(768)) {
+			margin-right: calc(toRem(20) + percent(111, 1200)); // logo-button=265px, button-icon-menu=160px, icon-menu-padding-right=6px -> 265-160+6
+			// margin-right: percent(265, 1200);
+		}
+		@media (max-width: $mobileL) {
+			order: 1;
+			// grid-row: 1;
+			// grid-column: 1;
+		}
+		@media (min-width: toEm(425)) {
+			// margin-right: auto;
+		}
+	}
+
+	// .header__button
+	&__button {
+		// grid-column: 4 / 6;
+		// width: 100%;
+		flex: 0 1 toRem(380);
+		@media (min-width: toEm(425)) {
+			margin-inline: auto;
+			// margin-right: auto;
+		}
+		@media (min-width: toEm(321)) {
+			// margin-left: auto;
+		}
+		@media (max-width: toEm($minWidth)) {
+			margin-inline: auto;
+		}
+		@media (max-width: $mobileL) {
+			margin-left: auto;
+			order: 3;
+			// grid-row: 2;
+			// grid-column: 1;
+			// display: none;
+		}
+	}
+
+	// .header__menu
+	&__menu {
+	}
+
+	// .header__icon-menu
+	&__icon-menu {
+		// grid-column: 6 / 7;
+		// justify-self: end;
+		// margin-right: toRem(-6); // т.к. добавился padding и иконка сместилась
+		margin-right: toRem(-8); // т.к. добавился padding и иконка сместилась
+		margin-left: toRem(14);
+
+		.header.sticky & {
+			margin-left: 0;
+		}
+		@media (min-width: toEm(768)) {
+			// margin-left: toRem(24);
+			// margin-left: auto;
+		}
+		@media (max-width: $mobileL) {
+			margin-right: 0;
+			margin-left: auto;
+			order: 2;
+			// grid-row: 1;
+			// grid-column: 1;
+		}
+	}
+}
+
+.menu {
+	// display: none;
+
+	// .menu__body
+	&__body {
+		position: fixed;
+		// position: absolute;
+		// z-index: 1;
+		// width: 100%;
+		height: 100%;
+		// height: content;
+		width: calc(50% + 1rem);
+		// height: auto;
+		// right: -100%;
+		left: -100%;
+		overflow: auto; // не работает если не задан height или задан auto
+		top: 0;
+		// transition: right 0.4s;
+		@media (prefers-reduced-motion: no-preference) {
+			transition: left 0.4s;
+		}
+		z-index: 11;
+
+		@media (min-width: toEm($containerWidth)) {
+			width: toRem(615);
+		}
+
+		// background-color: red;
+		@supports (scrollbar-gutter: stable) {
+			scrollbar-gutter: stable;
+		}
+		@supports (scrollbar-width: auto) {
+			// scrollbar-width: $scrollbarWidth;
+			scrollbar-color: $textColorLight $bcColorDark;
+
+			@media (forced-colors: active) {
+				scrollbar-color: auto;
+			}
+		}
+
+		.menu-open & {
+			// right: 0;
+			left: 0;
+			// box-shadow: $bold-shadow-dark;
+			// right: 0;
+
+			&::before {
+				// transition-delay: 0s;
+				// left: 0;
+				// transition-delay: 1s;
+			}
+		}
+
+		@media (max-width: $mobileL) {
+			width: 100%;
+			// border-bottom-right-radius: toRem(20);
+			// border-bottom-left-radius: toRem(20);
+		}
+	}
+
+	// .menu__list
+	&__list {
+		display: grid;
+
+		// @include adaptiveValue('padding-top', 141, 129, 0, 768, 320); // посмотреть в DevTools высоту шапки на этих ширинах + 40px
+		// background-color: $bcColorMedium;
+		// background-color: yellow;
+
+		background-color: $bcColorMain;
+		border-bottom-right-radius: $borderRadiusBig;
+		row-gap: toRem(20);
+
+		// padding-bottom: toRem(40);
+		// padding-top: toRem(100);
+		padding-inline: toRem(15) toRem(20);
+		@include adaptiveValue('padding-top', 150, 100);
+		@include adaptiveValue('padding-bottom', 60, 40);
+
+		.sticky & {
+			padding-top: toRem(90);
+		}
+	}
+
+	// .menu__item
+	&__item {
+	}
+
+	// .menu__link
+	&__link {
+		font-size: toRem(20);
+		line-height: math.div(24, 20);
+		font-weight: 700;
+		text-transform: uppercase;
+		// color: $textColorDark;
+		color: $textColorLight;
+		padding: toRem(10) toRem(15);
+		border-radius: $borderRadiusSmall;
+
+		transition: background-color 0.3s ease 0s;
+		// &.--active,
+		&._navigator-active {
+			// color: $link-active;
+		}
+		&:focus-visible {
+			background-color: $bcColorDark;
+		}
+		@media (any-hover: hover) {
+			&:hover {
+				background-color: $bcColorDark;
+			}
+		}
+		@media (any-hover: none) {
+			&:active {
+				// color: $text-accent;
+			}
+		}
+	}
+	// .menu__icon
+	&__icon {
+	}
+}
+
+/* BURGER icon */
+.icon-menu {
+	// display: none;
+	// position: -webkit-sticky;
+	// position: sticky;
+	// top: 10px;
+
+	display: inline-flex;
+	z-index: 5;
+	padding: toRem(10) toRem(8);
+	border-radius: toRem(10);
+
+	// border: 1px solid lime;
+	transition: background-color 0.3s ease 0s;
+
+	@media (any-hover: hover) {
+		&:hover {
+			background-color: $bcColorDark;
+		}
+	}
+	&:focus-visible {
+		background-color: $bcColorDark;
+	}
+
+	@media (any-hover: none) {
+		cursor: default;
+	}
+
+	.popup-show & {
+		// z-index: 9;
+	}
+
+	// .icon-menu__wrapper
+	&__wrapper {
+		position: relative;
+		top: toRem(-1.5);
+		width: toRem(50);
+		// width: 100%;
+		height: toRem(19);
+
+		span {
+			position: absolute;
+			width: 100%;
+			right: 0;
+			height: toRem(3);
+			border-radius: $borderRadius;
+			background-color: $textColorLight;
+			// transition: top 0.3s ease 0s;
+
+			&:nth-child(1) {
+				top: 0;
+				@media (prefers-reduced-motion: no-preference) {
+					transition: top 0.2s linear 0.2s, transform 0.2s linear 0s;
+				}
+			}
+			&:nth-child(3) {
+				// bottom: 0;
+				top: 100%;
+				@media (prefers-reduced-motion: no-preference) {
+					transition: top 0.2s linear 0.2s, transform 0.2s linear 0s;
+				}
+			}
+			&:nth-child(2) {
+				// top: calc(50% - toRem(1));
+				top: 50%;
+				@media (prefers-reduced-motion: no-preference) {
+					transition: width 0.2s linear 0.2s, right 0.2s linear 0.2s;
+				}
+			}
+			@media (forced-colors: active) {
+				background-color: LinkText;
+				// background-color: currentColor;
+				// border: toRem(1) solid LinkText;
+			}
+		}
+		.menu-open & {
+			span {
+				// background-color: $text-accent;
+				// background-color: $textColorLight;
+				&:nth-child(2) {
+					width: 0;
+					right: 50%;
+					@media (prefers-reduced-motion: no-preference) {
+						transition-delay: 0.1s;
+					}
+				}
+				&:nth-child(1),
+				&:nth-child(3) {
+					top: 50%;
+					@media (prefers-reduced-motion: no-preference) {
+						transition-delay: 0s, 0.2s;
+					}
+				}
+				&:nth-child(1) {
+					transform: rotate(30deg);
+				}
+				&:nth-child(3) {
+					transform: rotate(-30deg);
+				}
+				@media (forced-colors: active) {
+					// background-color: LinkText;
+					// background-color: currentColor;
+					// border: toRem(1) solid LinkText;
+				}
+			}
+		}
+	}
+	// }
+
+	z-index: 100;
+	// position: relative;
+	top: 0;
+	// фиксация icon-menu после блока hero
+	.header.sticky & {
+		// margin-right: 0;
+		padding: toRem(10) toRem(8);
+		position: fixed;
+		background-color: rgb(255 255 255 / 0.5);
+		backdrop-filter: blur(toRem(2));
+		border-radius: toRem(10);
+		top: toRem(10);
+
+		@media (forced-colors: active) {
+			// background-color: unset;
+			// backdrop-filter: unset;
+			padding: 0;
+			top: toRem(11.5);
+		}
+
+		@media (prefers-reduced-motion: no-preference) {
+			transition: top 0.5s ease 0s;
+		}
+
+		.icon-menu__wrapper {
+			span {
+				background-color: $textColorDark;
+				@media (forced-colors: active) {
+					background-color: LinkText;
+					// background-color: unset;
+				}
+			}
+		}
+	}
+}
+
+//=======================================================

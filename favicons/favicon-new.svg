@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs" width="160" height="109"><svg width="160" height="109" viewBox="0 0 160 109" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_14_95)">
+<path d="M0 14C0 6.26802 6.26801 0 14 0H91V109H16C7.16344 109 0 101.837 0 93V14Z" fill="#8F7E70"></path>
+<path d="M100 0H144C152.837 0 160 7.16344 160 16V50H100V0Z" fill="#CCC1B4"></path>
+<path d="M100 59H160V93C160 101.837 152.837 109 144 109H100V59Z" fill="#3C342E"></path>
+</g>
+<defs>
+<clipPath id="SvgjsClipPath1081">
+<rect width="160" height="109" fill="white"></rect>
+</clipPath>
+</defs>
+</svg><style>@media (prefers-color-scheme: light) { :root { filter: none; } }
+@media (prefers-color-scheme: dark) { :root { filter: none; } }
+</style></svg>

@@ -1,0 +1,264 @@
+.popup {
+	position: fixed;
+	// @supports (scrollbar-gutter: stable) {
+	// 	position: absolute; // тогда popup не по центру
+	// }
+	// position: absolute;
+	/* top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0; */
+	inset: 0;
+	// padding: 30px 10px;
+	padding: toRem(30) toRem(15);
+	visibility: hidden;
+	pointer-events: none;
+	// если пользователь не возражает против использования анимации и переходов
+	@media (prefers-reduced-motion: no-preference) {
+		transition: visibility 0.8s ease 0s;
+	}
+	z-index: 5;
+
+	&.popup_show {
+		z-index: 150;
+		visibility: visible;
+		overflow: auto;
+		pointer-events: auto;
+	}
+
+	// .popup__wrapper
+	&__wrapper {
+		min-height: 100%;
+		display: grid;
+		place-items: center;
+		// align-items: center;
+		// justify-items: center;
+
+		// display: flex;
+		// justify-content: center;
+		// align-items: center;
+	}
+
+	// .popup__content
+	&__content {
+		visibility: hidden;
+		transform: scale(0);
+
+		background-color: $bcColorMedium;
+		// background-color: yellow;
+		width: 100%;
+		max-width: toRem(600);
+		border-radius: $borderRadius;
+
+		// padding: toRem(20);
+		@include adaptiveValue('padding-inline', 50, 15);
+		@include adaptiveValue('padding-top', 25, 15);
+		@include adaptiveValue('padding-bottom', 40, 30);
+
+		// если пользователь не возражает против использования анимации и переходов
+		@media (prefers-reduced-motion: no-preference) {
+			// transition: transform 0.3s ease 0s;
+			transition: all 0.3s ease 0s;
+		}
+
+		@media (forced-colors: active) {
+			border: toRem(1) solid transparent;
+		}
+
+		.popup_show & {
+			visibility: visible;
+			transform: scale(1);
+		}
+
+		display: grid;
+		row-gap: toRem(10);
+		// justify-items: center;
+	}
+
+	// .popup__close
+	&__close {
+	}
+
+	// .popup__text
+	&__text {
+		// padding-block: toRem(20);
+	}
+
+	// popup__title
+	&__title {
+		text-align: center;
+		&:not(:last-child) {
+			margin-bottom: toEm(20, 20);
+		}
+	}
+
+	// .popup__form
+	&__form {
+		display: grid;
+		row-gap: toRem(20);
+		max-width: toRem(300);
+		margin-inline: auto;
+	}
+}
+
+//=======================================================
+/* КНОПКА ЗАКРЫТИЯ POPUP */
+.close-popup {
+	padding: toRem(6) toRem(4);
+	justify-self: end;
+	border-radius: toRem(10);
+	transition: background-color 0.3s ease 0s;
+
+	// .close-popup__wrapper
+	&__wrapper {
+		display: inline-block;
+		position: relative;
+		top: toRem(1);
+		width: toRem(40);
+		height: toRem(15);
+
+		span {
+			position: absolute;
+			width: 100%;
+			left: 50%;
+			height: toRem(2);
+			border-radius: $borderRadius;
+			background-color: $bcColorMain;
+			transition: background-color 0.3s ease 0s;
+			top: 50%;
+
+			&:nth-child(1) {
+				transform: translateX(-50%) rotate(-30deg);
+			}
+			&:nth-child(2) {
+				transform: translateX(-50%) rotate(30deg);
+			}
+
+			@media (forced-colors: active) {
+				background-color: LinkText;
+			}
+		}
+	}
+
+	@media (any-hover: hover) {
+		&:hover {
+			background-color: $bcColorDark;
+			.close-popup__wrapper {
+				span {
+					background-color: $textColorLight;
+
+					@media (forced-colors: active) {
+						background-color: LinkText;
+					}
+				}
+			}
+		}
+	}
+
+	&:focus-visible {
+		background-color: $bcColorDark;
+		.close-popup__wrapper {
+			span {
+				background-color: $textColorLight;
+				@media (forced-colors: active) {
+					background-color: LinkText;
+				}
+			}
+		}
+	}
+}
+//=======================================================
+/* FORM */
+.form {
+	$clrSuccess: hsl(143, 100%, 26%);
+	$clrWarning: hsl(43, 100%, 66%);
+	$clrError: hsl(348, 55%, 49%);
+
+	// .form__group
+	&__group {
+		display: grid;
+		row-gap: toRem(4);
+	}
+
+	// .form__button
+	&__button {
+		font-size: toRem(16);
+
+		background-color: $bcColorMain;
+		color: $textColorLight;
+		padding-block: toEm(13, 16);
+		padding-inline: toEm(10, 16);
+
+		&.submit {
+			background-color: $bcColorButton;
+			color: $textColorDark;
+		}
+
+		@media (forced-colors: active) {
+			border: toRem(1) solid transparent;
+			color: LinkText;
+		}
+
+		@media (any-hover: none) {
+			&:active {
+				// background-color: red;
+				// 	color: $textColorDark;
+			}
+		}
+	}
+
+	label {
+		// margin-left: toRem(8);
+		font-weight: 700;
+		// text-transform: uppercase;
+	}
+
+	input {
+		// display: inline-block;
+
+		// id="name"
+		&#name {
+			text-transform: capitalize;
+		}
+	}
+
+	input,
+	textarea {
+		color: $textColorLight;
+		outline: toRem(2) solid transparent;
+		background-color: $bcColorDark;
+		padding: toRem(10) toRem(15);
+		// border-radius: toRem(20);
+		border-radius: $borderRadiusSmall;
+
+		&:not(:placeholder-shown):valid {
+			outline-color: $clrSuccess;
+		}
+
+		&:not(:placeholder-shown):invalid {
+			outline-color: $clrError;
+		}
+
+		&:focus:invalid {
+			outline-color: $clrWarning;
+		}
+
+		&:focus {
+			// outline-color: var(--clr-warning);
+		}
+	}
+
+	textarea {
+		min-height: toRem(120);
+		resize: none;
+
+		// цвет текста, если есть ошибка. По умолчанию при ошибке подчеркивается волнистой красной линией
+		&::spelling-error {
+			// color: red;
+		}
+
+		// id="message"
+		&#message {
+		}
+	}
+}

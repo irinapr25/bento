@@ -1,0 +1,184 @@
+/* ABOUT US */
+.about {
+	// .about__container
+	&__container {
+		display: grid;
+		// grid-template-columns: 5fr 5fr 1fr 1fr;
+		//grid-template-columns: 5fr 1fr;
+		grid-template-columns: 1fr;
+		@media (min-width: toEm(576)) {
+			grid-template-columns: 5.557377fr 1fr; // grid-template-columns: 1017px 183px
+		}
+
+		// grid-template-rows: 2.03fr 1fr 1fr;
+		// grid-template-rows: 2.03fr 1fr;
+		// grid-template-rows: max-content 124px;
+		// grid-template-rows: max-content percent(124, 303.08);
+		grid-template-rows: max-content toRem(124); // нельзя fr, если контента станет меньше, будет черная дырка
+		// grid-template-rows: max-content percent(124, 376); // 376px - высота about__inner; тоже рабочий вариант, если только контента не станет критично мало
+		// grid-template-rows: max-content toRem(124) toRem(124);
+		// background-color: $bcColorSoftLight;
+
+		position: relative;
+		z-index: 2;
+		// overflow: hidden;
+
+		@media (forced-colors: active) {
+			// grid-template-rows: max-content;
+		}
+
+		.shape-left {
+			// z-index: 2;
+			// background-color: pink;
+			background-color: $bcColorSoftLight;
+
+			grid-row: 2 / 3;
+			grid-column: 1 / 2;
+
+			border-bottom-left-radius: $borderRadius;
+			// border-top-right-radius: $borderRadius 10px;
+
+			//transform: skewY(-6.945deg); // катеты 1017.91px и 123.994px
+
+			@media (max-width: $tabletMobile) {
+				border-bottom-right-radius: $borderRadius;
+			}
+		}
+
+		@media (min-width: toEm(576)) {
+			.shape-right {
+				// background-color: green;
+				background-color: $bcColorSoftLight;
+
+				@media (min-width: toEm(576)) {
+					grid-row: 2 / 3;
+					grid-column: 2 / 3;
+					// inset: 0;
+					// width: 100%;
+					width: 100.16%; // чтобы не появлялась артефактная полоса справа
+					// transform: skewY(34.078deg); // катеты 183.291px и 123.994px
+
+					// top: 100.2%;
+					// right: 0.02%;
+				}
+
+				// border-bottom-right-radius: $borderRadius;
+				border-bottom-right-radius: $borderRadiusBig;
+				@media (min-width: toEm(768)) {
+				}
+
+				// right: 0;
+				left: 0;
+				bottom: 0;
+				// z-index: 2;
+			}
+
+			.shape-center {
+				grid-row: 2 / 3;
+				grid-column: 1 / 2;
+				// transform: skew(55.922deg, -6.945deg); // 55.922deg; 90-34.078deg; второй угол у катетов 183px и 123.994px
+				top: 100.04%; // чтобы совпадали края
+				// top: 100%;
+				// top: calc(100% + toRem(0.1));
+
+				// width: 100%;
+				// height: 100%;
+
+				// top: calc(100% + toRem(20));
+
+				// box-shadow: 3px -3px 0px white;
+				// box-shadow: toRem(6) toRem(-6) 0px $bcColorSoftLight;
+
+				// background-color: #fff;
+				// height: percent(30, 183.2);
+				background-color: $bcColorMain;
+				// background-color: blue;
+				border-top-left-radius: $borderRadius;
+				border-bottom-right-radius: toRem(5);
+			}
+			.shape-center-shadow {
+				grid-row: 2 / 3;
+				grid-column: 1 / 2;
+				// transform: skew(55.922deg, -6.945deg); // 55.922deg; 90-34.078deg; второй угол у катетов 183px и 123.994px
+
+				top: 98.8%; // чтобы не было артефакткой обводки
+				right: -0.2%;
+				// top: 100%;
+				// right: 0;
+				background-color: $bcColorSoftLight;
+
+				// background-color: red;
+				// z-index: 1;
+			}
+		}
+	}
+
+	// .about__inner
+	&__inner {
+		grid-row: 1 / 3;
+		grid-column: 1 / 3;
+
+		background-color: $bcColorSoftLight;
+		// border-radius: $borderRadius;
+
+		border-top-left-radius: $borderRadius;
+		border-top-right-radius: $borderRadius;
+
+		@media (max-width: $tabletMobile) {
+			border-bottom-right-radius: $borderRadius;
+			border-bottom-left-radius: $borderRadius;
+		}
+
+		position: relative;
+		z-index: 1;
+		// margin-bottom: 20px;
+
+		// padding-top: toRem(50);
+		@include adaptiveValue('padding-top', 50, 30);
+		// padding-bottom: toRem(194);
+		// padding-bottom: toRem(70); // 194px-от текста до конца about - 124px-высота фигур
+		// padding-bottom: percent(70, 1200);
+		@include adaptiveValue('padding-bottom', 70, 50);
+
+		// padding-inline: toRem(50);
+		// @include adaptiveValue('padding-inline', 50, 15, 0, 768, 320);
+		@include adaptiveValue('padding-inline', 50, 15);
+
+		@media (max-width: $tablet) {
+			// max-width: toRem(630);
+			// padding-inline: toRem(15);
+		}
+
+		@media (forced-colors: active) {
+			@include adaptiveValue('padding-bottom', 50, 30);
+			padding-inline: 0;
+		}
+	}
+
+	// .about__content
+	&__content {
+		// padding-bottom: percent(70, 1100);
+		// max-width: toRem(630);
+	}
+
+	// .about__label
+	&__label {
+		&:not(:last-child) {
+			margin-bottom: toEm(30, 20);
+		}
+	}
+	// .about__title
+	&__title {
+		margin-bottom: toEm(30, 40);
+	}
+
+	// .about__text
+	&__text {
+		max-width: toRem(952);
+		p {
+			&:not(:last-child) {
+				margin-bottom: toEm(9, 16);
+			}
+		}
+	}
+}

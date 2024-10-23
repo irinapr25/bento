@@ -1,0 +1,397 @@
+/* SECTIONS = ABOUT + PROJECTS */
+.sections {
+	// background-color: #fff;
+
+	// .sections__container
+	&__container {
+	}
+
+	// .sections__wrapper
+	&__wrapper {
+		display: grid;
+		position: relative;
+		grid-template-columns: 5fr 1fr;
+
+		grid-template-rows: auto 124px auto;
+
+		// column-gap: toRem(20);
+		// row-gap: toRem(20);
+		.shape {
+			position: absolute;
+
+			/* 	// grid-row: 2 / 3;
+			// grid-column: 2 / 3;
+			// background-color: #fff;
+			// background-color: $bcColorMedium;
+			// width: 100%;
+			// height: 100%;
+			// bottom: 0;
+			// left: 0;
+			// right: 0;
+			// border-top-left-radius: 10px 10px;
+			// border-top-right-radius: 30px;
+			// transform: rotate(-45deg);
+			transform-origin: 0% 0%;
+
+			position: absolute;
+			width: toRem(20);
+			aspect-ratio: 1;
+			background-color: #fff;
+			background-color: $bcColorMedium;
+			// background-image: radial-gradient(circle at 100% 100%, transparent 1.5rem, red calc(1.5rem + 1px));
+			// background-image: radial-gradient(circle at 100% 100%, transparent toRem(30), black calc(toRem(30) + 1px));
+			// rotate: 45deg;
+			transform: translate(-62%, 0%);
+			grid-row: 2 / 3;
+			grid-column: 2;
+			top: 0%;
+			border-radius: 50%;
+			left: 0;
+			// right: 0;
+			// box-shadow: -1rem 0 0 white;
+			z-index: 1; */
+			// clip-path: polygon(0% 100%, 83.333333% 0, 100% 100%);
+			clip-path: polygon(100% 0%, 100% 100%, 0% 0%);
+			// rotate: (-45deg);
+			// clip-path: polygon(0% 0%, -124px 80%, 0% 100%);
+			grid-row: 2 / 3;
+			grid-column: 1 / 3;
+			// width: 100%;
+			// height: 100%;
+			background-color: #fff;
+			// border-top-right-radius: 20px;
+			// border-radius: 100px;
+			// box-shadow: 0px 0px 0 -40px red;
+			/* 		left: -50px; 
+			left: 0px; 
+			width: 100px;
+			height: 40px;
+			background: #3498db; 
+			border-top-left-radius: 50px; 
+			border-top-right-radius: 50px; */
+
+			// left: 800px;
+
+			// display: inline-block;
+			// width: 7em;
+			// height: 7em;
+			// width: 800px;
+			// height: 200px;
+			// // margin-right: 70px;
+			// clip-path: polygon(100% 0%, 100% 100%, 0% 0%);
+			// // -webkit-clip-path: polygon(100% 0%, 100% 100%, 0% 0%);
+			// background-color: #34495e;
+			// background-color: $bcColorMedium;
+			// border-radius: 0 2em 0 0;
+			// rotate: (-8deg);
+			// // transform: translateX(-50%);
+			// top: 0;
+			// left: 0;
+			// // top: -14px;
+			// // left: -121px;
+			// z-index: 2;
+			// transform-origin: 100% 0;
+			// box-shadow: 0px 0px 0 toRem(19) black;
+		}
+		&::before {
+			content: '';
+			position: absolute;
+
+			grid-row: 2 / 3;
+			grid-column: 1 / 2;
+			width: 101%;
+			// width: 102%;
+			height: 100%;
+			background-color: $bcColorMedium;
+			// background-color: red;
+
+			// transform: skewY(-6.952deg); // катеты 1017px и 124px
+			transform: skewY(-7.069deg); // катеты 1000px и 124px
+			transform-origin: right top;
+
+			// border-top-right-radius: 30px 10px;
+			border-top-right-radius: toRem(32) toRem(10);
+			// border-top-right-radius: toRem(20) toRem(20);
+			border-top-left-radius: $borderRadius;
+			z-index: 1;
+			left: 0;
+			bottom: 0;
+		}
+
+		&::after {
+			content: '';
+			position: absolute;
+
+			grid-row: 2 / 3;
+			grid-column: 2 / 3;
+			// grid-column: 3 / 4;
+			// grid-column: 2 / 4;
+			// width: 100.5%;
+			width: 100%;
+			height: 100%;
+			// height: 99.8%;
+			// width: 96%;
+			// height: calc(100% - );
+			// height: calc(100% - toRem(2));
+			background-color: $bcColorMedium;
+
+			// transform: skewY(34.121deg); // катеты 183px и 124px
+			transform: skewY(31.799deg); // катеты 200px и 124px
+			transform-origin: left bottom;
+
+			border-top-right-radius: $borderRadiusSmall;
+			// border-top-left-radius: 30px 4px;
+			border-top-left-radius: toRem(30) toRem(6);
+			right: 0;
+			// left: -2px;
+			bottom: 0;
+		}
+	}
+
+	// .sections__about
+	&__about {
+		grid-row: 1 / 2;
+		grid-column: 1 / 3;
+		// margin-bottom: toRem(20);
+	}
+
+	// .sections__projects
+	&__projects {
+		grid-row: 3 / 4;
+		grid-column: 1 / 3;
+	}
+}
+
+/* ABOUT US */
+/* .about {
+	background-color: $bcColorSoftLight;
+	border-radius: $borderRadius;
+
+	padding-inline: toRem(50);
+	padding-top: toRem(50);
+	padding-bottom: toRem(194);
+
+	margin-bottom: 20px;
+
+	// .about__label
+	&__label {
+		&:not(:last-child) {
+			margin-bottom: toEm(30, 20);
+		}
+	}
+	// .about__title
+	&__title {
+		margin-bottom: toEm(30, 40);
+	}
+	// .about__text
+	&__text {
+	}
+} */
+
+/* PROJECTS */
+.projects {
+	// padding-bottom: toRem(84.97);
+
+	/* 	display: grid;
+	position: relative;
+	grid-template-columns: 5fr 1fr;
+
+	grid-template-rows: toRem(124) auto;
+
+	// column-gap: toRem(20);
+	// row-gap: toRem(20);
+	margin-top: percent(-62, 1200);
+	&::before {
+		content: '';
+		position: absolute;
+
+		grid-row: 1 / 2;
+		grid-column: 1 / 2;
+		width: 100.5%;
+		height: 100%;
+		background-color: $bcColorMedium;
+
+		// transform: skewY(-6.952deg); // катеты 1017px и 124px
+		transform: skewY(-7.069deg); // катеты 1000px и 124px
+		transform-origin: right top;
+
+		border-top-right-radius: 20px 7px;
+		border-top-left-radius: $borderRadius;
+		box-shadow: 0 0 0 toRem(48) $bcColorMain;
+	}
+
+	&::after {
+		content: '';
+		position: absolute;
+
+		grid-row: 1 / 2;
+		grid-column: 2 / 3;
+		width: 100.5%;
+		width: 100%;
+		height: 100%;
+		background-color: $bcColorMedium;
+
+		left: 0;
+		bottom: 0;
+		// transform: skewY(34.121deg); // катеты 183px и 124px
+		transform: skewY(31.799deg); // катеты 200px и 124px
+		transform-origin: left bottom;
+
+		border-top-right-radius: $borderRadiusSmall;
+		border-top-left-radius: 20px 4px;
+
+		// box-shadow: 0px 0px 0 $gap $bcColorMain;
+	} */
+
+	/* 	.projects__inner {
+		padding-inline: toRem(50);
+		background-color: $bcColorMedium;
+		border-radius: $borderRadius;
+		padding-bottom: toRem(26.82);
+		padding-top: toRem(89);
+		position: relative;
+		z-index: 1;
+		width: 100%;
+		grid-column: 1 / 3;
+		grid-row: 2 / 3;
+	} */
+
+	// .projects__label
+	&__label {
+		// grid-column: 1 / 3;
+	}
+	// .projects__title
+	&__title {
+		// grid-column: 3 / 5;
+	}
+	// .projects__content
+	&__content {
+	}
+	// .projects__image-wrap
+	&__image-wrap {
+	}
+	// .projects__slider
+	&__slider {
+	}
+}
+/* 
+.content-projects {
+	// .content-projects__title
+	&__title {
+	}
+	// .content-projects__text
+	&__text {
+	}
+
+	// .content-projects__list
+	&__list {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		grid-template-rows: repeat(2, 1fr);
+		grid-template-rows: toRem(70) max-content;
+		// grid-template-rows: toRem(70) toRem(60);
+
+		column-gap: toRem(10);
+		max-width: toRem(380);
+
+		position: relative;
+		overflow: hidden;
+	}
+
+	// .content-projects__item
+	&__item {
+		color: $textColorLight;
+		background-color: $bcColorDark;
+
+		font-size: toRem(20);
+		line-height: math.div(24, 20);
+		font-weight: 700;
+		text-transform: uppercase;
+
+		border-radius: $borderRadiusSmall;
+
+		padding-bottom: toEm(18, 20);
+
+		padding-inline: toEm(10, 20); // отступы безопасности
+
+		// width: 100%;
+		// height: 100%;
+
+		display: grid;
+		justify-content: center;
+		align-items: end;
+
+		text-align: center;
+
+		// align-self: end;
+
+		min-height: toEm(60, 20);
+
+		p {
+			position: relative;
+			z-index: 1;
+			sup {
+				font-size: toRem(10);
+				position: absolute;
+				top: 0;
+				left: 100%;
+			}
+		}
+
+		grid-row: 2 / 3;
+
+		&:not(:last-child) {
+			// margin-top: 10px;
+			padding-top: toEm(18, 20);
+			align-self: end;
+		}
+
+		&:last-child {
+			// grid-row: 1 / 3;
+			// border-top-left-radius: 0;
+			border-top-right-radius: 0;
+
+			// padding-top: 70px;
+
+			&::before {
+				grid-row: 1 / 2;
+				grid-column: 3 / 4;
+
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+
+				width: 100%;
+				height: 102%;
+				background-color: $bcColorDark;
+				// background-color: red;
+
+				transform: skewY(-23.797deg); // катеты 120px и 52.92px
+				transform-origin: right top;
+
+				border-top-right-radius: $borderRadius; // больше этот подходит
+				border-top-left-radius: $borderRadiusSmall;
+				border-bottom-left-radius: $borderRadiusSmall;
+			}
+		}
+	}
+} */
+
+/* SLIDER */
+.slider {
+	// .slider__wrapper
+	&__wrapper {
+	}
+	// .slider__slide
+	&__slide {
+	}
+	// .slider__button
+	&__button {
+	}
+}
+.prev {
+}
+.next {
+}

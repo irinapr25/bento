@@ -1,0 +1,1093 @@
+.page {
+	// .page__hero
+	&__hero {
+		@include adaptiveValue('padding-top', 25, 15);
+		@include adaptiveValue('padding-bottom', 25, 15);
+	}
+
+	// .page__statistics
+	&__statistics {
+		@include adaptiveValue('padding-top', 25, 15);
+		@include adaptiveValue('padding-bottom', 25, 15);
+	}
+
+	// .page__about
+	&__about {
+		@include adaptiveValue('padding-top', 25, 15);
+
+		// margin-bottom: toRem(44);
+		@include adaptiveValue('margin-bottom', 44, 30);
+
+		@media (forced-colors: active) {
+			margin-bottom: 0;
+		}
+	}
+
+	// .page__projects
+	&__projects {
+		@include adaptiveValue('padding-bottom', 37.5, 22.5);
+		// background-color: #fff;
+	}
+
+	// .page__tariffs
+	&__tariffs {
+		// background-color: #fff;
+
+		@include adaptiveValue('padding-top', 37.5, 22.5);
+		@include adaptiveValue('padding-bottom', 37.5, 22.5);
+	}
+
+	// .page__gallery
+	&__gallery {
+		@include adaptiveValue('padding-top', 37.5, 22.5);
+		@include adaptiveValue('padding-bottom', 25, 15);
+	}
+}
+
+/* HERO */
+.hero {
+	color: $textColorDark;
+	// background-color: pink;
+	// min-height: toRem(750);
+
+	// .hero__container
+	&__container {
+		display: grid;
+		// grid-template-columns: 1fr 2.049fr;
+		// position: relative;
+		// grid-template-rows: auto auto;
+		// column-gap: toRem(20);
+		// background-color: #fff;
+		// grid-template-rows: max-content 1fr 1fr;
+		background-color: #000;
+		//width: 99.8%; // убирает артефактную полосу снизу
+		// height: 99%;
+
+		overflow: clip;
+		// overflow: hidden;
+
+		// box-sizing: content-box;
+		// border-radius: $borderRadius;
+
+		// position: relative;
+	}
+
+	// .hero__inner
+	&__inner {
+		grid-column: 1 / 3;
+		grid-row: 1 / 3;
+		// transform: translate(0.1px, 0.1px);
+		// background-image: url('../icons/hero/big.svg');
+		// background-repeat: no-repeat;
+		// background-size: cover;
+
+		// min-height: toRem(750);
+		// padding-bottom: toRem(31);
+		// grid-column: 1 /3;
+		// grid-row: 1 /2;
+		// padding-bottom: toRem(31);
+
+		// background-color: #fff;
+		background-color: $bcColorMedium;
+		// padding-top: percent(50, 1200);
+		@include adaptiveValue('padding-top', 50, 30);
+
+		border-radius: $borderRadius;
+
+		display: grid;
+
+		grid-template-columns: 1fr;
+		grid-template-rows: repeat(4, max-content);
+		// column-gap: $gap;
+		// row-gap: toRem(20);
+		// justify-items: center; // сужает элементы
+		//!position: relative; // относительно него позиционируются ::before и ::after
+		// text-align: center;
+		// width: calc(100% - 2px);
+		// ?
+		// box-shadow: 0px 0px 0 toRem(15) $bcColorMain;
+		// overflow: hidden; // лучше для container чтобы слева не было артефактной полосы
+		// overflow: clip;
+
+		/* скругление слева от image */
+		@media (min-width: toEm(768)) {
+			column-gap: $gap;
+			position: relative;
+
+			&::before {
+				content: '';
+				grid-column: 2 / 3;
+				grid-row: 3 / 4;
+				// $width: percent(393.33, 393.33);
+				// $height: percent(265.72, 393.33);
+				// width: $width;
+				// width: calc(100% + $gap);
+				// height: $height;
+				// width: 100%;
+				// height: 100%; // возможно нужно чуть больше размер
+
+				position: absolute;
+
+				// left: 0;
+				left: toRem(-1);
+				// top: 0;
+				bottom: toRem(-1);
+				// top: -12%;
+				rotate: -90deg;
+				z-index: 1;
+				$size: $borderRadius;
+				width: $size;
+				aspect-ratio: 1;
+				// background-image: radial-gradient(circle at 100% 100%, rgba(0, 0, 0, 0) $size, $bcColorMain calc($size + 1px));
+				background-image: radial-gradient(circle at calc(100% + toRem(1)) calc(100% + toRem(1)), rgba(0, 0, 0, 0) $size, $bcColorMain calc($size + 1px));
+				// background-image: radial-gradient(circle at calc(100% + 1px) calc(100% + 1px), rgba(0, 0, 0, 0) $size, red calc($size + 1px));
+			}
+		}
+
+		@media (min-width: toEm(768)) {
+			// background-color: $bcColorMedium;
+
+			// grid-template-columns: 1fr 2fr;
+			grid-template-columns: 1fr 2.049fr; // чтобы offer был как в макете 387px
+			grid-template-rows: max-content 1fr 1fr;
+			// grid-template-rows: max-content max-content max-content;
+			// * в инспекторе
+			// grid-template-columns 393.33px 786.67px
+			// grid-template-rows 169px 265.72px 265.72px
+			// grid-template-rows: repeat(3, 33.333%);
+
+			// скругление слева внизу у большого изображения
+			// не в hero__image, т.к. для hero__image - для изменения высоты img вместо aspect-ration - padding-bottom, который позволяет сделать img выше
+			/* &::after {
+				// $size: $borderRadius;
+				// $size: calc($borderRadius + 1px);
+				content: '';
+				position: absolute;
+
+				grid-column: 2 / 3;
+				grid-row: 3 / 4;
+				aspect-ratio: 1;
+
+				// background-color: red;
+
+				//rotate: -90deg;
+				//background-image: radial-gradient(circle at 100% 100%, rgba(255, 255, 255, 0) calc($size - 1px), $bcColorMain calc($size + 1px));
+				// background-image: radial-gradient(circle at 100% 100%, rgba(255, 255, 255, 0) $size, green calc($size + 1px));
+				// bottom: -0.1px; // для увеличения, чтобы не было полосы
+				// width: calc($size + toRem(3));
+				// bottom: toRem(-3);
+				// left: toRem(-3);
+				// width: calc($borderRadius + 1px);
+				// bottom: -1px;
+				// left: -1px;
+
+				width: $borderRadius;
+				bottom: 0;
+				left: 0;
+				// bottom: 0;
+				border-bottom-left-radius: $borderRadius;
+				// box-shadow: -$gap $gap 0 $gap $bcColorMain;
+				// box-shadow: -21px 21px 0 21px red;
+				// box-shadow: 1px -1px 0 $bcColorMedium, -31px 31px 0 30px green;
+				// box-shadow: -31px 31px 0 30px $bcColorMain;
+				// box-shadow: calc(-1 * $borderRadius - toRem(1)) calc($borderRadius + toRem(1)) 0 $borderRadius $bcColorMain; // 31-чтобы не было границ при маленьком масштабе
+				// z-index: 2;
+			} */
+		}
+
+		//=======================================================
+		@media (max-width: $tablet) {
+			overflow: hidden;
+			// padding-inline: toRem(15);
+			// grid-template-rows: max-content max-content max-content 1fr max-content;
+			// grid-template-rows: max-content;
+			row-gap: toRem(20);
+			// padding-bottom: percent(50, 1200);
+			// padding-bottom: toRem(30);
+
+			//  > * {
+			// 	&:not(:last-child) {
+			// 		// margin-inline: toRem(15);
+			// 		padding-inline: toRem(15);
+			// 	}
+			// }
+		}
+		// @include adaptiveValue('padding-bottom', 30, 20, 1, 767.98, 320);
+		//! @include adaptiveValue('padding-bottom', 30, 20, 3, 767.98, 320);
+	}
+
+	// .hero__title h1
+	&__title {
+		// max-width: toRem(600);
+		// max-width: percent(630, 800);
+		// background: pink;
+		// padding-bottom: toEm(15, 64);
+		// padding-top: percent(50, 800);
+
+		font-weight: 700;
+		line-height: math.div(77, 64);
+		height: 100%;
+		text-align: center;
+
+		align-self: center;
+
+		@media (min-width: toEm(768)) {
+			grid-column: 2 / 3;
+			grid-row: 1 / 2;
+
+			// margin-bottom: toEm(15, 64); // не работает при уменьшении ширины
+			padding-bottom: toEm(15, 64);
+			// align-self: start;
+			&:not(:last-child) {
+			}
+		}
+		// font-size: $fontSizeTitle;
+		@include adaptiveValue('font-size', 64, 48, 2, $containerWidth, 768);
+		@include adaptiveValue('font-size', 48, 32, 3, 767.98);
+
+		padding-inline: toRem(15); // для безопасного отступа, чтобы не приклеился в границам
+		@media (max-width: $tablet) {
+		}
+
+		//=======================================================
+		grid-row: 2 / 3;
+	}
+
+	// .hero__about
+	&__about {
+		// padding-top: percent(65, 400);
+		// width: 100%;
+		// height: 100%;
+		// position: relative;
+		// max-width: toRem(210);
+		// margin-top: percent(15, 400);
+
+		padding-inline: toRem(15); // для безопасного отступа, чтобы не приклеился в границам
+		@media (min-width: toEm(768)) {
+			grid-column: 1 / 2;
+			grid-row: 1 / 2;
+
+			margin-top: percent(15, 393.33); // т.к. ниже title на 15px, 393.33px - по факту ширина 1-ой колонки (узнала по ::before)
+			// padding-bottom: toEm(15, 16);
+			margin-bottom: toEm(15, 16);
+		}
+
+		//=======================================================
+		grid-row: 1 / 2;
+	}
+
+	// .hero__image-wrap
+	&__image-wrap {
+		// для Alt
+		// background-color: $bcColorDark;
+		// color: $textColorLight;
+		// font-size: toRem(20);
+		// line-height: math.div(24, 20);
+
+		// max-width: toRem(630);
+		// aspect-ratio: 630 / 500;
+
+		// width: 100%;
+		@media (min-width: toEm(768)) {
+			overflow: hidden;
+			border-radius: $borderRadius;
+			// box-shadow: 0 toRem(60) 0 toRem(6) green;
+			// box-shadow: toRem(-0.5) toRem(50) 0 0px $bcColorMain;
+			// box-shadow: toRem(-3) toRem(60) 0 toRem(0.5) $bcColorMain;
+			//!box-shadow: toRem(-40) toRem(40) 0 toRem(-20) $bcColorMain;
+
+			grid-column: 2 / 3;
+			grid-row: 2 / 4;
+
+			margin-top: auto;
+			// z-index: 3;
+			// position: relative;
+		}
+
+		@media (max-width: $tablet) {
+			// margin-inline: percent(53, 737.36);
+			// padding-inline: toRem(15);
+		}
+		@include adaptiveValue('padding-inline', 32.25, 15, 3, 767.98);
+
+		@media (forced-colors: active) {
+			padding-inline: 0;
+		}
+	}
+
+	// .hero__image
+	&__image {
+		// height: 100%;
+		// padding-bottom: percent(500, 800);
+		// max-width: toRem(630);
+
+		// max-height: percent(500, 786.67);
+		// border: 1px solid $bcColorDark;
+
+		// display: inline-block;
+		overflow: hidden;
+		border-radius: $borderRadius;
+		// border-bottom-left-radius: $borderRadius;
+
+		// для Alt
+		background-color: $bcColorDark;
+		color: $textColorLight;
+		font-size: toRem(20);
+		line-height: math.div(24, 20);
+		// text-align: center;
+
+		// box-shadow: 0 toRem(60) 0 toRem(0.1) blue;
+		// box-shadow: 0 toRem(60) 0 toRem(6) $bcColorMain;
+
+		width: 100%; // если задан max-width: toRem(630); и картинка не отображается, то размеры изображения задает Alt, но не больше значения в max-width
+		margin-inline: auto; // если у hero__inner убрать justify-items: center
+
+		@media (min-width: toEm(768)) {
+			// grid-column: 2 / 3;
+			// grid-row: 2 / 4;
+
+			max-width: percent(630, 786.67);
+
+			// align-self: end;
+			position: relative;
+			margin-bottom: percent(31, 786.67);
+			// padding-bottom: percent(500, 786.67);
+			// padding-bottom: 342px;
+			// @include adaptiveValue('padding-bottom', 500, 342, 0, $containerWidth, 768); // так красивее
+			// @include adaptiveValue('padding-bottom', 500, 372.8, 0, $containerWidth, 768); //
+			@include adaptiveValue('padding-bottom', 500, 392.4, 0, $containerWidth, 768); // для offer-hero padding-top:percent(178, 393.33);
+			//@include adaptiveValue('padding-bottom', 500, 397.2, 0, $containerWidth, 768); // для offer-hero padding-top: percent(186, 393.33);
+
+			@media (forced-colors: active) {
+				margin-bottom: 0;
+				max-width: 100%;
+			}
+		}
+
+		@media (max-width: $tablet) {
+			aspect-ratio: 630 / 500;
+			max-width: toRem(630);
+			// width: percent(630, 786.67);
+			margin-bottom: percent(20, 737.36); // для красоты border-radius 707.36 + 2*15-отступы
+
+			@media (forced-colors: active) {
+				// max-width: 100%;
+				margin-bottom: 0;
+			}
+		}
+
+		// background-color: $bcColorMedium;
+		// padding-bottom: toRem(31);
+		//padding-inline: percent(74, 800) percent(85, 800); // чтобы при уменьшении размеров экрана картинка уменьшалась
+		//padding-bottom: percent(31, 790);
+
+		// margin-left: 20px;
+		// margin-inline: 85px;
+
+		// мешает отображению размеров, занимаемых изображением, если оно не отобразиться
+		// display: grid;
+		// align-items: center;
+		// justify-content: center;
+	}
+
+	// .hero__img
+	&__img {
+		@media (min-width: toEm(768)) {
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+
+		// max-width: toRem(630);
+		// aspect-ratio: 630 / 500;
+
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: 50% 50%;
+	}
+
+	// .hero__offer
+	&__offer {
+		@media (min-width: toEm(768)) {
+			grid-column: 1 / 2;
+			grid-row: 2 / 4;
+			// grid-column: 1 / 2;
+			// grid-row: 1 / 3;
+			// position: absolute;
+			margin-top: percent(29, 393.33);
+			// margin-top: percent(250, 393.33);
+			// bottom: 0;
+
+			@media (forced-colors: active) {
+				margin-top: 0;
+			}
+		}
+		// grid-column: 1 / 2;
+		grid-row: 4 / 5;
+		// margin-right: toRem(20);
+	}
+}
+
+/* ABOUT HERO */
+.about-hero {
+	// display: grid;
+	// row-gap: toRem(10);
+	// align-items: center;
+	// justify-content: center;
+	// align-self: start;
+	// background-color: #fff;
+
+	text-align: center;
+
+	// width: 100%; // для ::after, если hero__inner задан justify-items: center
+	//position: relative; // чтобы был выше ::after
+	// z-index: 1;
+
+	// .about-hero__title
+	&__title {
+		// @include adaptiveValue('font-size', 20, 18, 0, $containerWidth, 768);
+		// position: relative;
+		// z-index: 1;
+		&:not(:last-child) {
+			margin-bottom: toEm(10, 20);
+		}
+	}
+
+	// .about-hero__text
+	&__text {
+		// position: relative;
+		// z-index: 1;
+		// text-align: center;
+		// max-width: toRem(210);
+		max-width: toRem(290);
+		margin-inline: auto;
+		// @include adaptiveValue('font-size', 16, 14, 0);
+
+		// ситуация в принципе не возможна, т.к. сломается весь дизайн
+		p {
+			&:not(:last-child) {
+				margin-bottom: toEm(10, 16);
+			}
+		}
+
+		@media (min-width: toEm(768)) {
+			max-width: toRem(210);
+		}
+	}
+}
+
+/* OFFER */
+.offer-hero {
+	// background: url('../icons/hero/small.svg');
+	// background-repeat: no-repeat;
+	// background-size: cover;
+
+	// background-color: $bcColorDark;
+	color: $textColorLight;
+	text-align: center;
+	// width: 100%;
+	// height: 100%;
+	// height: calc(100% - percent(11, 400)); // 31px - 20px box-shadow
+
+	// align-self: end;
+	// overflow: hidden;
+
+	border-radius: $borderRadius;
+	// border: 20px solid $bcColorMain;
+	// border-right: 20px solid green;
+
+	// position: relative;
+
+	// box-shadow: 20px 0px 0 $bcColorMain;
+	// box-shadow: 0 1rem 0 white, 0 0 0 1rem white;
+
+	// grid-template-rows: 1fr max-content;
+
+	// padding-bottom: percent(31, 387);
+	// overflow: hidden;
+
+	// !padding-top: percent(198, 737.36);
+
+	// padding-top: 198px;
+
+	// padding-inline: toRem(15);
+	// !@include adaptiveValue('padding-inline', 32.25, 15, 3, 767.98);
+
+	@media (min-width: toEm(768)) {
+		// !padding-top: percent(178, 393.33); // 178px-отступ от hero__image сверху; 393.33px-ширина .offer-hero по факту
+		//padding-top: percent(186, 393.33); // так красивее когда title приближается к краям
+		//padding-inline: percent(49, 393.33); // чтобы при уменьшении размеров экрана картинка уменьшалась слишком много на 767px
+		// !padding-inline: percent(32, 393.33); // чтобы при уменьшении размеров экрана картинка уменьшалась
+		// margin-top: percent(178, 393.33); // можно и margin
+
+		// margin-bottom: percent(31, 393.33); // 393.33 - ширина
+		// !padding-bottom: percent(31, 393.33); // 393.33 - ширина
+
+		display: grid;
+		align-items: end;
+	}
+
+	// @media (max-width: $mobileL) {
+	@media (max-width: $tabletMobile) {
+		// padding-top: 146px;
+		//! padding-top: percent(198, 545.36);
+	}
+
+	// .offer-hero__shape
+	/* 	&__shape {
+		position: absolute;
+		// top: calc(0% + percent(31, 400));
+		top: 0;
+		// top: toRem(31);
+		// @include adaptiveValue('top', 31, 12, 0, $containerWidth, 768);
+
+		left: 0;
+		// width: 100.07%;
+		width: 100.09%;
+		height: 100%;
+		height: 50%;
+		height: calc(100% + toRem(50));
+		background-color: $bcColorDark;
+		// background-color: $bcColorDark;
+
+		// background: conic-gradient(from -75deg at 100% 100%, #000 25%, #0000 0%);
+
+		// z-index: 1;
+
+		//transform: skew(10deg, 0deg); // катеты
+		transform: skewY(-20.54deg); // катеты 387px и 145px
+		transform-origin: right top;
+
+		// border-radius: 30px;
+		// border-top-right-radius: $borderRadius;
+		border-top-right-radius: $borderRadiusBig; // больше этот подходит
+		border-top-left-radius: $borderRadius;
+		// border-bottom-right-radius: toRem(30);
+
+		// box-shadow: 0 0 0 toRem(19) yellow;
+		// box-shadow: 0 0 0 $gap $bcColorMain;
+		z-index: 1;
+
+		@media (min-width: toEm(768)) {
+			top: percent(31, 531);
+			grid-row: 2 / 4;
+			grid-column: 1 / 2;
+		}
+
+		//=======================================================
+		@media (max-width: $tablet) {
+			grid-row: 4 / 5;
+		}
+	} */
+	//=======================================================
+	display: grid;
+	grid-template-rows: 1fr 1fr;
+	position: relative;
+
+	@media (forced-colors: active) {
+		border: toRem(1) solid transparent;
+	}
+
+	// .offer-hero__shape-skew
+	&__shape-skew {
+		grid-row: 1 / 2;
+		grid-column: 1 / 2;
+		// width: 100%;
+		width: calc(100% + toRem(0.25));
+		height: 120%;
+		// background-color: red;
+		background-color: $bcColorDark;
+		@media (min-width: toEm(768)) {
+			// transform: skewY(-20.54deg); // катеты 387px и 145px
+			transform: skewY(-20.799deg); // катеты 387px и 147px-от верха текста до угла вверх
+		}
+		transform: skewY(-15.085deg); // катеты 545.36px-ширина .offer-hero и 147px-padding-top у .offer-hero__inner на viewport-e 575.98px
+		transform-origin: right top;
+		//border-bottom-right-radius: $borderRadius; //?
+		border-top-right-radius: $borderRadiusBig;
+		border-top-left-radius: $borderRadius;
+		z-index: 2;
+		position: absolute;
+		top: 0;
+		left: 0;
+
+		@media (forced-colors: active) {
+			// border: toRem(1) solid transparent;
+			z-index: -1;
+		}
+	}
+
+	// .offer-hero__shape-skew-shadow
+	&__shape-skew-shadow {
+		grid-row: 1 / 2;
+		grid-column: 1 / 2;
+		@media (min-width: toEm(768)) {
+			// transform: skewY(-20.54deg); // катеты 387px и 145px
+			transform: skewY(-20.799deg); // катеты 387px и 147px-от верха текста до угла вверх
+		}
+		transform: skewY(-15.085deg); // катеты 545.36px-ширина .offer-hero и 147px-padding-top у .offer-hero__inner на viewport-e 575.98px
+
+		transform-origin: right top;
+		width: calc(100% + toRem(1));
+		height: calc(100% + 2 * $gap);
+		// background-color: green;
+		background-color: $bcColorMain;
+
+		@media (min-width: toEm(768)) {
+			border-top-right-radius: $borderRadiusBig;
+			// top: -12%;
+			top: calc($gap * (-1.5));
+			width: calc(100% + $gap);
+		}
+		position: absolute;
+		left: 0;
+		// top: -10%;
+		top: -$gap;
+		// z-index: 2;
+
+		/* скругление контентной части справа */
+		&::after {
+			@media (max-width: $tablet) {
+				content: '';
+
+				// $width: percent(393.33, 393.33);
+				// $height: percent(265.72, 393.33);
+				// width: $width;
+				// width: calc(100% + $gap);
+				// height: $height;
+				// width: 100%;
+				// height: 100%; // возможно нужно чуть больше размер
+
+				position: absolute;
+
+				// left: 0;
+				right: toRem(-1);
+				top: 0;
+				// top: -12%;
+				transform: translateY(calc(100% - toRem(1)));
+				rotate: -180deg;
+				$size: $borderRadius;
+				width: $size;
+				aspect-ratio: 1;
+				// background-image: radial-gradient(circle at 100% 100%, rgba(0, 0, 0, 0) $size, $bcColorMain calc($size + 1px));
+				background-image: radial-gradient(circle at calc(100% + toRem(1)) calc(100% + toRem(1)), rgba(0, 0, 0, 0) $size, $bcColorMain calc($size + 1px));
+				// background-image: radial-gradient(circle at calc(100% + 1px) calc(100% + 1px), rgba(0, 0, 0, 0) $size, red calc($size + 1px));
+			}
+		}
+
+		/* скругление контентной части слева */
+		&::before {
+			content: '';
+
+			// $width: percent(393.33, 393.33);
+			// $height: percent(265.72, 393.33);
+			// width: $width;
+			// width: calc(100% + $gap);
+			// height: $height;
+			// width: 100%;
+			// height: 100%; // возможно нужно чуть больше размер
+
+			position: absolute;
+
+			// left: 0;
+			left: toRem(-1);
+			top: 0;
+			// top: -12%;
+			transform: translateX(calc(100% - toRem(1)));
+			rotate: -90deg;
+			$size: $borderRadiusBig;
+			width: $size;
+			aspect-ratio: 1;
+			// background-image: radial-gradient(circle at 100% 100%, rgba(0, 0, 0, 0) $size, $bcColorMain calc($size + 1px));
+			background-image: radial-gradient(circle at calc(100% + toRem(1)) calc(100% + toRem(1)), rgba(0, 0, 0, 0) $size, $bcColorMain calc($size + 1px));
+			// background-image: radial-gradient(circle at calc(100% + 1px) calc(100% + 1px), rgba(0, 0, 0, 0) $size, red calc($size + 1px));
+		}
+
+		@media (forced-colors: active) {
+			z-index: -1;
+		}
+	}
+	// .offer-hero__shape-inner
+	&__shape-inner {
+		grid-row: 2 / 3;
+		grid-column: 1 / 2;
+		border-bottom-right-radius: $borderRadius;
+		border-bottom-left-radius: $borderRadius;
+
+		border-top-left-radius: $borderRadius; // чтобы не торчал угол сверху
+		// border-top-right-radius: $borderRadius;
+
+		// background-color: #fff;
+		background-color: $bcColorDark;
+		// z-index: 1;
+		z-index: 2;
+		height: 100%;
+		// width: calc(100% + toRem(0.1));
+		width: calc(100%);
+
+		@media (forced-colors: active) {
+			z-index: -1;
+		}
+	}
+
+	// .offer-hero__shape-inner-shadow
+	&__shape-inner-shadow {
+		@media (min-width: toEm(768)) {
+			grid-row: 2 / 3;
+			grid-column: 1 / 2;
+			// border-bottom-right-radius: $borderRadius;
+			// border-bottom-left-radius: $borderRadius;
+			// background-color: blue;
+			background-color: $bcColorMain;
+			z-index: 1;
+			height: 100%;
+			position: absolute;
+			left: 0;
+			// width: calc(100% + $gap);
+			width: calc(100% + $gap + toRem(0.2));
+			// width: calc(100.05% + $gap);
+		}
+
+		@media (forced-colors: active) {
+			z-index: -1;
+		}
+	}
+
+	// .offer-hero__inner
+	&__inner {
+		grid-row: 1 / 3;
+		grid-column: 1 / 2;
+		// background-color: yellow;
+		// min-width: fit-content;
+		// justify-self: center;
+		@media (min-width: toEm(768)) {
+			margin-bottom: percent(31, 387.01); // 393.33 - ширина
+			padding-inline: percent(32, 387.01);
+			padding-top: percent(147, 387.01); // 178px - 29px-margin-top у offer-hero
+
+			@media (forced-colors: active) {
+				padding-top: 0;
+				margin-bottom: 0;
+				align-self: center;
+			}
+		}
+
+		padding-top: percent(147, 545.36); // 147px-по макету выступ вверх; 545.36px-ширина .offer-hero__inner на viewport-e 576.86px
+		// padding-top: 198px;
+
+		// padding-inline: toRem(15);
+		@include adaptiveValue('padding-inline', 32.25, 15, 3, 767.98);
+		@include adaptiveValue('padding-bottom', 30, 20, 3, 767.98, 320);
+
+		// max-height: 353px;
+
+		// padding-bottom: toRem(31);
+		// margin-bottom: percent(31, 286.71);
+
+		// padding-top: percent(178, 295.33); // 178px-отступ от image сверху; 295.33px-ширина .offer-hero__inner по факту
+		// padding-top: 178px;
+
+		// display: grid;
+		// grid-template-rows: max-content max-content 165px max-content;
+		// background-color: $bcColorDark;
+
+		// row-gap: toRem(15);
+		// row-gap: percent(15, 322);
+		// justify-items: center;
+		// border-radius: $borderRadius;
+		// position: relative;
+		z-index: 2;
+		// justify-self: center;
+
+		// row-gap: toRem(15);
+
+		display: grid;
+		// align-items: end;
+		// align-self: end;
+		justify-items: center;
+		row-gap: toRem(15);
+
+		// > * {
+		// 	margin-inline: auto;
+		// 	@media (min-width: toEm(768)) {
+		// 		&:not(:last-child) {
+		// 			// margin-bottom: percent(15, 296.97);
+		// 			margin-bottom: toRem(15);
+		// 		}
+		// 	}
+		// }
+
+		//=======================================================
+		@media (max-width: $tablet) {
+			// margin-left: auto;
+			// display: grid;
+			// row-gap: toRem(15);
+			column-gap: toRem(20);
+			grid-template-columns: repeat(2, 1fr);
+			// grid-template-rows: repeat(3, max-content);
+			// grid-template-rows: repeat(3, auto);
+			// grid-template-rows: repeat(3, 1fr);
+			// grid-template-rows: 1fr 1fr 1fr max-content;
+			// grid-template-rows: max-content 1fr max-content;
+			// grid-template-rows: repeat(2, max-content);
+			grid-template-rows: 1fr max-content;
+		}
+
+		// @media (max-width: $mobileL) {
+		@media (max-width: $tabletMobile) {
+			grid-template-columns: 1fr;
+			grid-template-rows: auto;
+		}
+
+		@media (forced-colors: active) {
+			@include adaptiveValue('padding-top', 30, 20, 3, 767.98, 320);
+		}
+	}
+
+	// .offer-hero__desc
+	&__desc {
+		@media (max-width: $tablet) {
+			grid-column: 1 / 2;
+			grid-row: 1 / 3;
+
+			align-self: center;
+			// margin-block: auto;
+			//padding-top: 76.4px; // (224.96px-высота .offer-hero__inner - 72.16px-высота .offer-hero__desc) / 2 - расположим по центру по вертикали относительно img и button; чтобы добавить больше текста и он не поплыл наверх
+			// !padding-top: percent(76.4, 343.68); // 343.68 - ширина колонки где desc
+			//padding-inline: percent(20, 343.68); // чтобы title не соприкасался с краем, а переходил на другую строку
+		}
+		padding-inline: percent(20, 343.68); // чтобы title не соприкасался с краем, а переходил на другую строку
+
+		// @media (max-width: $mobileL) {
+		@media (max-width: $tabletMobile) {
+			// padding-top: 0;
+			grid-column: 1 / 2;
+			grid-row: 1 / 2;
+		}
+
+		@media (min-width: toEm(768)) {
+			padding-inline: percent(18, 329.33); // чтобы title не соприкасался с краем, а переходил на другую строку
+		}
+	}
+
+	// .offer-hero__title
+	&__title {
+		// margin-bottom: percent(15, 286.71);
+		// margin-bottom: percent(15, 393.33);
+		// margin-inline: auto;
+		// max-width: percent(289, 393.33);
+
+		// @include adaptiveValue('font-size', 20, 18, 0, $containerWidth, 768);
+
+		// @media (max-width: $pcTablet) {
+		@media ((min-width: toEm(768)) and (max-width: toEm(1200))) {
+			span {
+				// !display: none; // ?
+			}
+		}
+		// @media (min-width: toEm(768)) {
+		&:not(:last-child) {
+			// margin-bottom: toEm(15, 20);
+			margin-bottom: toRem(15);
+		}
+		// }
+
+		//=======================================================
+		@media (max-width: $tablet) {
+			// grid-column: 1 / 2;
+			// grid-row: 2 / 3;
+
+			// align-self: center;
+
+			//padding-bottom: toEm(39, 20); // 24 + 15
+
+			// max-width: toRem(260);
+		}
+
+		&:not(:last-child) {
+			// margin-bottom: toRem(120);
+		}
+		@media (max-width: $mobileL) {
+			// grid-row: 1 / 2;
+			// grid-column: 1 / 2;
+		}
+	}
+
+	// .offer-hero__text
+	&__text {
+		max-width: toEm(175);
+		// margin-bottom: percent(15, 286.71);
+		// margin-bottom: percent(15, 393.33);
+
+		margin-inline: auto;
+		// @include adaptiveValue('font-size', 16, 14, 0);
+
+		p {
+			&:not(:last-child) {
+				margin-bottom: toEm(10, 16);
+			}
+		}
+
+		//=======================================================
+
+		// grid-column: 1 / 2;
+		// grid-row: 3 / 4;
+
+		@media (max-width: $mobileL) {
+			// grid-row: 2 / 3;
+			// grid-column: 1 / 2;
+		}
+		// align-self: end;
+		// align-self: center;
+	}
+
+	// .offer-hero__image
+	&__image {
+		width: 100%; // если задан max-width: toRem(600); и картинка не отображается, то размеры изображения задает Alt, но не больше значения в max-width
+		// max-width: toRem(280);
+		// max-width: percent(280, 393.33);
+		aspect-ratio: 280 / 165;
+		overflow: hidden;
+		// display: inline-flex;
+
+		// margin-bottom: percent(15, 286.71);
+		// margin-bottom: percent(15, 393.33);
+		// margin-bottom: percent(15, 296.97);
+
+		// border: 1px solid #000;
+
+		// box-sizing: content-box;
+		// для Alt
+		// background-color: $bcColorMedium; // дает свечение вокруг картинки
+		color: $textColorLight;
+		font-size: toRem(20);
+		line-height: math.div(24, 20);
+
+		// border-radius: $borderRadius;
+		@include adaptiveValue('border-radius', 30, 24, 0, $containerWidth, 768);
+
+		//=======================================================
+		@media (max-width: $tablet) {
+			grid-column: 2 / 3;
+			// grid-row: 1 / 4;
+			grid-row: 1 / 2;
+
+			align-self: end;
+		}
+
+		// @media (max-width: $mobileL) {
+		@media (max-width: $tabletMobile) {
+			grid-column: 1 / 2;
+			// grid-row: 3 / 4;
+			grid-row: 2 / 3;
+		}
+
+		// @media (min-width: toEm(425)) {
+		@media (min-width: toEm(576)) {
+			// @media (min-width: toEm(768)) {
+			max-width: toRem(280);
+		}
+	}
+
+	// .offer-hero__img
+	&__img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: 50% 10%;
+	}
+
+	// .offer-hero__button
+	&__button {
+		font-weight: 700;
+		text-transform: uppercase;
+
+		background-color: $bcColorMain;
+		border-radius: $borderRadius;
+		// max-width: toRem(280);
+		// max-width: percent(285, 393.33);
+		width: 100%;
+		line-height: math.div(24, 20);
+		padding-block: toEm(13, 20);
+		padding-inline: toEm(10, 20);
+
+		transition: all 0.4s ease 0s;
+
+		@media (prefers-reduced-motion: reduce) {
+			// transition: none;
+		}
+		// font-size: toRem(20); // $fontSizeUpperCase
+		@include adaptiveValue('font-size', 20, 16, 2, $containerWidth, 768);
+		@include adaptiveValue('font-size', 18, 16, 3, 767.98);
+
+		@media (min-width: toEm(768)) {
+			&:not(:first-child) {
+				// margin-top: toEm(15, 20);
+			}
+			// max-width: toRem(280);
+		}
+		@media (min-width: toEm(576)) {
+			max-width: toRem(280);
+		}
+
+		//=======================================================
+		@media (max-width: $tablet) {
+			grid-column: 2 / 3;
+			// grid-row: 4 / 5;
+			grid-row: 2 / 3;
+		}
+
+		// @media (max-width: $mobileL) {
+		@media (max-width: $tabletMobile) {
+			grid-column: 1 / 2;
+			grid-row: 3 / 4;
+		}
+
+		// hover
+		@media (any-hover: hover) {
+			&:hover {
+				color: $textColorDark;
+				background-color: $bcColorButton;
+			}
+		}
+
+		@media (any-hover: none) {
+			&:active {
+				color: $textColorDark;
+				background-color: $bcColorButton;
+			}
+		}
+
+		@media (forced-colors: active) {
+			// border: toRem(1) solid LinkText;
+			border: toRem(1) solid transparent;
+			color: LinkText;
+			// color: ButtonText;
+		}
+	}
+}
+//=======================================================
+/* 
+
+Когда вы применяете skewY(-20.54deg), то горизонтальные линии элемента будут смещаться в зависимости от высоты элемента. Смещение по оси X для любой точки высоты ℎ будет вычисляться по формуле:
+ΔX=h⋅tan(θ)
+
+где:
+h — высота элемента,
+θ — угол наклона в радианах (в данном случае θ=−20.54)
+ΔX — горизонтальное смещение точки на высоте 
+
+Шаги вычисления:
+1. Переведите угол в радианы, так как тригонометрические функции используют радианы
+θ rad = −20.54⋅π / 180 ≈−0.3585 рад
+2. Найдите тангенс угла:
+tan(−20.54∘) ≈ −0.3745
+3. Подставьте высоту элемента h и угол в формулу:
+ΔX = h⋅(−0.3745);
+
+Пример:
+Если высота элемента h=200 пикселей, тогда смещение:
+
+ΔX=200⋅(−0.3745)=−74.9 пикселей
+*/
